@@ -3,7 +3,7 @@ STAT_NAMES = ["str", "con", "dex", "int", "cha", "wis", "per", "will", "luck"]
 statTypes = {
 }
 
-# Add a much of different variabilities
+# Add a bunch of different variabilities
 
 def addFlatDistribution(name, high, low):
     statTypes[name] = {}
