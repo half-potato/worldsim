@@ -1,7 +1,7 @@
 import random, math, game
 
 class Item(Dict):
-    def __init__(self, name, rarity, quality=None, dob=game.time(), max_age=None, durability=1, stacksize=1, **kargs):
+    def __init__(self, name, rarity, quality=None, dob=game.time(), max_age=None, durability=100, stacksize=1, **kargs):
         """
         Parameters:
         -----------
@@ -20,16 +20,20 @@ class Item(Dict):
             self.quality = math.log(rarity) + random.gauss(.5, math.log(rarity))
         else:
             self.quality = quality
-        self.age = age
+        self.dob = dob
         self.max_age = max_age
         self.durability = durability
         self.stacksize = stacksize
         for i in kargs:
             self.setAttr(i, kargs[i])
 
-    def use(self, durability_used=None) -> bool:
-        if self.durability < 1:
-            return False
-        else:
-            self.durability -= durability_used or 1
-            return True
+    def getQuality(self):
+        return self.quality * (self.durability/100.)
+
+    def getAge(self):
+        """ yyyyyyyymmddhhmmss """
+        return game.time() - self.dob
+
+    def use(self):
+        """ probablistically damage the item """
+        probDamage = 1 - self.getQuality()/100. + (self.getAge() - self.max_age/2.)/self.max_age # temp
