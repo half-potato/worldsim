@@ -12,7 +12,7 @@ class Item(Dict):
         quality : float
             Multiplier for task it's used with
         dob : int
-            dob is the date of birth of the item 
+            dob is the date of birth of the item
         """
         self.name = name
         self.rarity = rarity
@@ -26,3 +26,10 @@ class Item(Dict):
         self.stacksize = stacksize
         for i in kargs:
             self.setAttr(i, kargs[i])
+
+    def use(self, durability_used=None) -> bool:
+        if self.durability < 1:
+            return False
+        else:
+            self.durability -= durability_used or 1
+            return True
