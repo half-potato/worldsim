@@ -1,4 +1,4 @@
-import os
+import os, utils
 
 # It's like a dictionary class hybrid
 class Dict:
@@ -30,8 +30,21 @@ class Dict:
         with open(filepath, "r") as f:
             for line in f:
                 s = [i.strip() for i in line.split(":")]
-                attrs[s[0]] = s[1]
+                if s[1] == "None":
+                    attrs[s[0]] = None
+                elif utils.isfloat(s[1]):
+                    attrs[s[0]] = float(s[1])
+                elif s[1].isdigit():
+                    attrs[s[0]] = int(s[1])
+                else:
+                    attrs[s[0]] = s[1]
         return Dict(**attrs)
+
+    def cast(d):
+        if not hasattr(d, "type"):
+            return d
+        t = utils.casting_dict[d.type]
+        return t(d)
 
     def __str__(self):
         s = ""

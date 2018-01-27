@@ -25,6 +25,7 @@ class Item(Dict):
         self.max_age = max_age
         self.durability = durability
         self.stacksize = stacksize
+        self.type = "item"
         for i in kargs:
             self.setAttr(i, kargs[i])
 
