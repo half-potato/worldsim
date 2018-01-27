@@ -1,4 +1,5 @@
 import random, math, game
+from Dict import Dict
 
 class Item(Dict):
     def __init__(self, name, rarity, quality=None, dob=game.time(), max_age=None, durability=100, stacksize=1, **kargs):

@@ -1,3 +1,5 @@
+import os
+
 # It's like a dictionary class hybrid
 class Dict:
     def __init__(self, *args, **kargs):
@@ -17,8 +19,8 @@ class Dict:
     def fromTemplate(name):
         return
 
-    def save(self, filepath):
-        with open(filepath, "w+") as f:
+    def save(self, path):
+        with open(os.path.join(path, self.name), "w+") as f:
             for i in self.getAttrList():
                 f.write("%s : %s\n" % (i, str(self.getAttr(i))))
 

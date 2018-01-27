@@ -1,6 +1,3 @@
-class Time:
-    def __init__(self, value):
-        self.value = value
-
-    def
-def time()
+world_time = 0
+def time():
+    return world_time
